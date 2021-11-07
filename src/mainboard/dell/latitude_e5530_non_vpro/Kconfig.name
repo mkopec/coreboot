@@ -1,0 +1,2 @@
+config BOARD_DELL_LATITUDE_E5530_NON_VPRO
+	bool "Latitude E5530 non-vPro"
