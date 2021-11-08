@@ -90,10 +90,6 @@ chip northbridge/intel/haswell # FIXME: check ec_present, usb_xhci_on_resume, gf
 			device pci 1f.3 on # SMBus
 				subsystemid 0x1028 0x05be
 			end
-			device pci 1f.5 off # SATA Controller (Legacy)
-			end
-			device pci 1f.6 off # Thermal
-			end
 		end
 		device pci 00.0 on # Mobile Host bridge
 			subsystemid 0x1028 0x05be
