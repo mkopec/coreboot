@@ -1,4 +1,4 @@
 Category: laptop
 ROM protocol: SPI
-Flashrom support: n
+Flashrom support: y
 FIXME: put ROM package, ROM socketed, Release year

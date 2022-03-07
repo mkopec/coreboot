@@ -1,5 +1,5 @@
-chip northbridge/intel/haswell # FIXME: check ec_present, usb_xhci_on_resume, gfx
-	register "ec_present" = "false"
+chip northbridge/intel/haswell # FIXME: check usb_xhci_on_resume, gfx
+	register "ec_present" = "1"
 	register "gfx" = "GMA_STATIC_DISPLAYS(0)"
 	register "gpu_ddi_e_connected" = "1"
 	register "gpu_dp_b_hotplug" = "4"
@@ -83,6 +83,16 @@ chip northbridge/intel/haswell # FIXME: check ec_present, usb_xhci_on_resume, gf
 			end
 			device pci 1f.0 on # LPC bridge
 				subsystemid 0x1028 0x05be
+				chip ec/dell/mec5055
+					device pnp 0c09.0 on end
+					device pnp 4e.1   on end
+					device pnp 4e.2   on end
+					device pnp 4e.3   on end
+					device pnp 4e.4   on end
+					device pnp 4e.5   on end
+					device pnp 4e.6   on end
+					device pnp 4e.7   on end
+				end
 			end
 			device pci 1f.2 on # SATA Controller (AHCI) Unsupported PCI device 8086:282a
 				subsystemid 0x1028 0x05be

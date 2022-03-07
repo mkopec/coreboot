@@ -2,10 +2,18 @@
 
 #include <arch/io.h>
 #include <console/console.h>
+#include <device/pnp.h>
 #include "mec5055.h"
 
 static const u16 EC_CTRL = 0x910;
 static const u16 EC_DATA = 0x911;
+
+static struct pnp_info dev_infos[] = {
+	{ NULL, 0x01 }, { NULL, 0x02 }, { NULL, 0x03 },
+	{ NULL, 0x04 }, { NULL, 0x05 }, { NULL, 0x06 },
+	{ NULL, 0x07 }
+};
+
 
 static void wait_ec(void)
 {
@@ -113,3 +121,13 @@ enum cb_err mec5055_ec_command_1(u8 cmd, const u8 *cmd_buf, int argc, u8 *res_bu
 
 	return read_ec_regs(1, res_buf, res_size);
 }
+
+static void ec_dell_mec5055_ops_enable(struct device *dev)
+{
+	pnp_enable_devices(dev, &pnp_ops, ARRAY_SIZE(dev_infos), dev_infos);
+}
+
+struct chip_operations ec_dell_mec5055_ops = {
+	CHIP_NAME("Dell EC")
+	.enable_dev = ec_dell_mec5055_ops_enable,
+};
