@@ -163,6 +163,38 @@ chip soc/intel/skylake
 			# Set LPC Serial IRQ mode
 			register "serirq_mode" = "SERIRQ_CONTINUOUS"
 			chip superio/ite/it8625e
+					register "ec.smbus_en"		= "1"
+					register "ec.smbus_24mhz"	= "1"
+					register "TMPIN1.mode"		= "THERMAL_DIODE"
+					register "TMPIN2.mode"		= "THERMAL_RESISTOR"
+					register "TMPIN3.mode"		= "THERMAL_PECI"
+					register "TMPIN3.offset"	= "100"
+					register "TMPIN3.min"		= "0"
+					register "TMPIN3.max"		= "100"
+
+					register "FAN1.mode" = "FAN_MODE_OFF"	# not used (atm)
+					register "FAN2.mode" = "FAN_SMART_AUTOMATIC"
+					register "FAN2.smart.tmpin"	= "2"
+					register "FAN2.smart.tmp_off"	= "0"
+					register "FAN2.smart.tmp_start"	= "40"
+					register "FAN2.smart.tmp_full"	= "90"
+					register "FAN2.smart.tmp_delta"	= "2"
+					register "FAN2.smart.full_lmt"	= "0"
+					register "FAN2.smart.smoothing"	= "0"
+					register "FAN2.smart.pwm_start"	= "48"
+					register "FAN2.smart.slope"	= "0x20"
+					register "FAN3.mode" = "FAN_SMART_AUTOMATIC"
+					register "FAN3.smart.tmpin"	= "2"
+					register "FAN3.smart.tmp_off"	= "0"
+					register "FAN3.smart.tmp_start"	= "40"
+					register "FAN3.smart.tmp_full"	= "90"
+					register "FAN3.smart.tmp_delta"	= "2"
+					register "FAN3.smart.full_lmt"	= "0"
+					register "FAN3.smart.smoothing"	= "0"
+					register "FAN3.smart.pwm_start"	= "48"
+					register "FAN3.smart.slope"	= "0x20"
+
+					register "ec.vin_mask" = "VIN_ALL"
 				device pnp 2e.0 off end		# FDC - not used
 				device pnp 2e.1 on		# COM1
 					io 0x60 = 0x3f8
@@ -175,7 +207,7 @@ chip soc/intel/skylake
 				device pnp 2e.3 on		# Parallel port
 					io 0x60 = 0x378
 					io 0x62 = 0x778		# for ECP mode
-					irq 0x70 = 5
+					irq 0x70 = 4
 					drq 0x74 = 3
 				end
 				device pnp 2e.4 on		# EC
@@ -195,7 +227,7 @@ chip soc/intel/skylake
 					io 0x62 = 0x300
 					io 0x64 = 0x321
 				end
-			end	#superio/ite/it8623e
+			end	#superio/ite/it8625e
 			chip drivers/pc80/tpm
 				device pnp 4e.0 on end  # TPM module
 			end

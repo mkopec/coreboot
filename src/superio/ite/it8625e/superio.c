@@ -42,7 +42,6 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, IT8625E_FDC, PNP_IO0 | PNP_IRQ0 | PNP_DRQ0, 0x0ff8, },
 	{ NULL, IT8625E_SP1, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 	{ NULL, IT8625E_SP2, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
 	{ NULL, IT8625E_PP, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_DRQ0,
@@ -52,6 +51,7 @@ static struct pnp_info pnp_dev_info[] = {
 	{ NULL, IT8625E_KBCM, PNP_IRQ0, },
 	{ NULL, IT8625E_GPIO, PNP_IO0 | PNP_IO1 | PNP_IO2 | PNP_IRQ0,
 		0x0fff, 0x0fe0, 0x0fff, },
+	{ NULL, IT8625E_CIR, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
 };
 
 static void enable_dev(struct device *dev)
