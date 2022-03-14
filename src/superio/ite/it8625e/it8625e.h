@@ -12,6 +12,6 @@
 #define IT8625E_KBCK 0x05 /* PS/2 keyboard */
 #define IT8625E_KBCM 0x06 /* PS/2 mouse */
 #define IT8625E_GPIO 0x07 /* GPIO */
-#define IT8625E_CIR  0x0a /* GPIO */
+#define IT8625E_CIR  0x0a /* Consumer IR */
 
 #endif /* SUPERIO_ITE_IT8625E_H */

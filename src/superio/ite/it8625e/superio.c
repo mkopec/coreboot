@@ -42,8 +42,10 @@ static struct device_operations ops = {
 };
 
 static struct pnp_info pnp_dev_info[] = {
-	{ NULL, IT8625E_SP1, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
-	{ NULL, IT8625E_SP2, PNP_IO0 | PNP_IRQ0, 0x0ff8, },
+	/* Serial Port 1 */
+	{ NULL, IT8625E_SP1, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
+	/* Serial Port 2 */
+	{ NULL, IT8625E_SP2, PNP_IO0 | PNP_IRQ0 | PNP_MSC0, 0x0ff8, },
 	{ NULL, IT8625E_PP, PNP_IO0 | PNP_IO1 | PNP_IRQ0 | PNP_DRQ0,
 		0x0ff8, 0x0ff8, },
 	{ NULL, IT8625E_EC, PNP_IO0 | PNP_IO1 | PNP_IRQ0, 0x0ff0, 0x0ff0, },
