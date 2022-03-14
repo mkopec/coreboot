@@ -157,8 +157,9 @@ chip soc/intel/skylake
 		device pci 1e.5 off end # SDIO
 		device pci 1e.6 off end # SDCard
 		device pci 1f.0 on      # LPC bridge
-			# Set @0x280-0x2ff I/O Range for SuperIO HWM
-			register "gen1_dec" = "0x007c0281"
+			register "gen1_dec" = "0x00fc0201"
+			register "gen2_dec" = "0x003c0a01"
+			register "gen3_dec" = "0x000c0081"
 
 			# Set LPC Serial IRQ mode
 			register "serirq_mode" = "SERIRQ_CONTINUOUS"
