@@ -165,9 +165,9 @@ chip soc/intel/skylake
 			register "serirq_mode" = "SERIRQ_CONTINUOUS"
 			chip superio/ite/it8625e
 					register "ec.smbus_en"		= "1"
-					#register "ec.smbus_24mhz"	= "1"
+					register "ec.smbus_24mhz"	= "1"
 					register "TMPIN1.mode"		= "THERMAL_DIODE" # EXT_SYS_TEMP
-					register "TMPIN2.mode"		= "THERMAL_PECI"
+					register "TMPIN2.mode"		= "THERMAL_DIODE"
 					register "TMPIN3.mode"		= "THERMAL_DIODE" # VR_TEMP_DA
 
 					register "FAN1.mode" = "FAN_MODE_OFF"	# not used (atm)
@@ -193,11 +193,12 @@ chip soc/intel/skylake
 					register "FAN3.smart.slope"	= "0x20"
 
 					register "ec.vin_mask" = "VIN_ALL"
-				device pnp 2e.1 off end	# COM1 (debug header)
+				device pnp 2e.1 off end	# COM1 (internal header)
 				device pnp 2e.2 on		# COM2 (rear port)
 					io 0x60 = 0x3f8
 					irq 0x70 = 4
 				end
+				device pnp 2e.3 off end		# Parallel port
 				device pnp 2e.3 on		# Parallel port
 					io 0x60 = 0x378
 					io 0x62 = 0x000		# for ECP mode
@@ -217,7 +218,7 @@ chip soc/intel/skylake
 				device pnp 2e.6 on		# PS/2 mouse
 					irq 0x70 = 12
 				end
-				device pnp 2e.7 off end		# GPIO
+				device pnp 2e.7 on end		# GPIO
 			end	#superio/ite/it8625e
 			chip drivers/pc80/tpm
 				device pnp 4e.0 on end  # TPM module
