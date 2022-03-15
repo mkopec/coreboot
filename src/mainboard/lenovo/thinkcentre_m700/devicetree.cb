@@ -170,7 +170,7 @@ chip soc/intel/skylake
 					register "TMPIN2.mode"		= "THERMAL_DIODE"
 					register "TMPIN3.mode"		= "THERMAL_DIODE" # VR_TEMP_DA
 
-					register "FAN1.mode" = "FAN_MODE_OFF"	# not used (atm)
+					register "FAN1.mode" = "FAN_MODE_OFF"
 					register "FAN2.mode" = "FAN_SMART_AUTOMATIC"
 					register "FAN2.smart.tmpin"	= "2"
 					register "FAN2.smart.tmp_off"	= "0"
