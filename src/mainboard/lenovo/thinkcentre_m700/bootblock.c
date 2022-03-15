@@ -51,7 +51,12 @@ static void ite_gpio_conf(pnp_devfn_t dev)
 
 void bootblock_mainboard_early_init(void)
 {
+    /* Disable internal serial port */
     ite_disable_serial(SERIAL1_DEV);
+
+    /* Configure GPIOs like stock firmware does */
     ite_gpio_conf(GPIO_DEV);
+
+    /* Enable early serial console on the rear serial port */
     ite_enable_serial(SERIAL2_DEV, CONFIG_TTYS0_BASE);
 }
