@@ -10,7 +10,7 @@ chip soc/intel/skylake
 	# Note that GPE events called out in ASL code rely on this
 	# route. i.e. If this route changes then the affected GPE
 	# offset bits also need to be changed.
-	register "gpe0_dw0" = "GPP_B"
+	register "gpe0_dw0" = "GPD"
 	register "gpe0_dw1" = "GPP_D"
 	register "gpe0_dw2" = "GPP_E"
 
@@ -165,13 +165,10 @@ chip soc/intel/skylake
 			register "serirq_mode" = "SERIRQ_CONTINUOUS"
 			chip superio/ite/it8625e
 					register "ec.smbus_en"		= "1"
-					register "ec.smbus_24mhz"	= "1"
-					register "TMPIN1.mode"		= "THERMAL_DIODE"
-					register "TMPIN2.mode"		= "THERMAL_RESISTOR"
-					register "TMPIN3.mode"		= "THERMAL_PECI"
-					register "TMPIN3.offset"	= "100"
-					register "TMPIN3.min"		= "0"
-					register "TMPIN3.max"		= "100"
+					#register "ec.smbus_24mhz"	= "1"
+					register "TMPIN1.mode"		= "THERMAL_DIODE" # EXT_SYS_TEMP
+					register "TMPIN2.mode"		= "THERMAL_PECI"
+					register "TMPIN3.mode"		= "THERMAL_DIODE" # VR_TEMP_DA
 
 					register "FAN1.mode" = "FAN_MODE_OFF"	# not used (atm)
 					register "FAN2.mode" = "FAN_SMART_AUTOMATIC"
@@ -196,24 +193,21 @@ chip soc/intel/skylake
 					register "FAN3.smart.slope"	= "0x20"
 
 					register "ec.vin_mask" = "VIN_ALL"
-				device pnp 2e.0 off end		# FDC - not used
-				device pnp 2e.1 on		# COM1
+				device pnp 2e.1 off end	# COM1 (debug header)
+				device pnp 2e.2 on		# COM2 (rear port)
 					io 0x60 = 0x3f8
 					irq 0x70 = 4
 				end
-				device pnp 2e.2 on		# COM2
-					io 0x60 = 0x2f8
-					irq 0x70 = 3
-				end
 				device pnp 2e.3 on		# Parallel port
 					io 0x60 = 0x378
-					io 0x62 = 0x778		# for ECP mode
-					irq 0x70 = 4
-					drq 0x74 = 3
+					io 0x62 = 0x000		# for ECP mode
+					irq 0x70 = 5
+					drq 0x74 = 4
 				end
 				device pnp 2e.4 on		# EC
-					io 0x60 = 0x290
+					io 0x60 = 0xa20
 					io 0x62 = 0x230
+					irq 0x70 = 9
 				end
 				device pnp 2e.5 on		# PS/2 keyboard
 					io 0x60 = 0x60
@@ -223,11 +217,7 @@ chip soc/intel/skylake
 				device pnp 2e.6 on		# PS/2 mouse
 					irq 0x70 = 12
 				end
-				device pnp 2e.7 on		# GPIO
-					io 0x60 = 0x320
-					io 0x62 = 0x300
-					io 0x64 = 0x321
-				end
+				device pnp 2e.7 off end		# GPIO
 			end	#superio/ite/it8625e
 			chip drivers/pc80/tpm
 				device pnp 4e.0 on end  # TPM module
@@ -239,7 +229,7 @@ chip soc/intel/skylake
 			register "PchHdaVcType" = "Vc1"
 		end
 		device pci 1f.4 on  end # SMBus
-		device pci 1f.5 on  end # PCH SPI
+		device pci 1f.5 off end # PCH SPI
 		device pci 1f.6 off end # GbE
 	end
 end
